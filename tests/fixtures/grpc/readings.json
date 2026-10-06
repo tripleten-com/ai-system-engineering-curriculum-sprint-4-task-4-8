@@ -1,0 +1,13 @@
+{
+  "_comment": "Coldline - Task 4.8. The supplied reading for poe grpc-call and poe payload-size, in the JSON form POST /api/v1/readings accepts. Synthetic. poe grpc-call sends it with a fresh reading_id each run; poe payload-size measures it exactly as written, keys in this order. The malformed reading is this one without temperature_c.",
+  "reading": {
+    "reading_id": "reading-grpc-0001",
+    "shipment_id": "shipment-syn-0414",
+    "temperature_c": 9.4,
+    "allowed_min_c": 2.0,
+    "allowed_max_c": 8.0,
+    "recorded_at": "2026-09-14T06:30:00Z",
+    "handling_note": "Hold the pallet at the Calais relay until dispatch confirms."
+  },
+  "malformed_omits": ["temperature_c"]
+}

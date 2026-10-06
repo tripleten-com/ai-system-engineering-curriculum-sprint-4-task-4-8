@@ -1,0 +1,17 @@
+# Coldline - Task 4.8
+# File: submission-template.yaml
+# Component: Public verifier fixture
+# Purpose: Exercise the shipped, blank answer sheet inside the public test suite.
+# Interacts With: tests/contract/test_submission.py
+# Sprint/Task: Sprint 4 - Project 4 / Task 4.8
+# Concepts: Deterministic assessment, blank-sheet rejection
+# Tools: YAML
+
+# The shipped submission.yaml, in shape: every value blank, zero, or an empty list.
+answers:
+  accepted_status: ""
+  refused_status: ""
+  json_bytes: 0
+  protobuf_bytes: 0
+  recommendation: ""
+  open_gaps: []

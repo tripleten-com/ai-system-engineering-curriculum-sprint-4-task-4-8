@@ -1,0 +1,65 @@
+# Coldline - Task 4.8
+# File: submission.yaml
+# Component: Student answer sheet
+# Purpose: Record your two call statuses, the two payload sizes, your recommendation, and the open gaps.
+# Interacts With: Submission schema, public verifier, gRPC contract checks, protected answer key
+# Sprint/Task: Sprint 4 - Project 4 / Task 4.8
+# Concepts: gRPC status codes, payload size, recommendation, limits of a control
+# Tools: YAML
+
+# Complete submission.yaml from your own runs and the sources named beside each answer.
+# Keep the supplied keys; replace the empty strings, the zeros and the empty list using each
+# field's stated type. Empty values fail verification.
+# Use submission-sample.yaml for format only; do not copy its fictional values.
+# Do not include secrets, personal data, or local absolute paths.
+
+answers:
+  # Step 4: the two calls
+  # Source: the status line `poe grpc-call --token gateway-valid` printed (accepted_status)
+  # and the one `poe grpc-call --token dispatcher-valid` printed (refused_status), after
+  # Step 3. Each is a gRPC status name exactly as printed, for example ALREADY_EXISTS.
+  # `poe verify` makes the same two calls and compares.
+  accepted_status: ""
+  refused_status: ""
+
+  # Step 4: the payload sizes
+  # Source: `poe payload-size`, which prints one supplied reading's size as JSON and as
+  # Protobuf. Each is a positive whole number of bytes, as printed.
+  json_bytes: 0
+  protobuf_bytes: 0
+
+  # Step 4: your recommendation for Dana
+  # Whether you would move the gateways to the gRPC intake. One of:
+  #   move_now                       move the gateways to the gRPC intake now
+  #   move_after_json_intake_closed  move them, once POST /api/v1/readings no longer accepts
+  #                                  readings from callers without a token
+  #   do_not_move                    keep the gateways on the JSON intake
+  # It is your call: `poe verify` checks only that the value is one of these three.
+  recommendation: ""
+
+  # Step 4: the gaps this change leaves open
+  # List every option below that is still open once your method, its interceptor
+  # registration and your tests are in place, each once, as a YAML list of the ids.
+  # Some options describe gaps this change closes: check each one against what you built
+  # and tested, not against how it sounds.
+  #   caller_is_unproven_gateway     an accepted call does not show that the caller is a
+  #                                  physical sensor gateway, that its reading is genuine,
+  #                                  or how a managed identity provider would issue and
+  #                                  revoke its tokens
+  #   dispatcher_token_submits       a valid dispatcher token can submit a reading through
+  #                                  the gRPC method
+  #   expired_token_reaches_method   a call carrying an expired token reaches the gRPC
+  #                                  method's code
+  #   json_intake_open               POST /api/v1/readings accepts a reading from a caller
+  #                                  that sends no token
+  #   plaintext_token                a call's bearer token crosses the network between
+  #                                  the gateway and the API unencrypted
+  #   reading_skips_worker_controls  a reading accepted through the gRPC method skips the
+  #                                  queue, and with it the guardrail, the redactor and the
+  #                                  audit events
+  #   sender_missing_from_audit      a reading's audit events do not name the caller that
+  #                                  submitted it, whichever intake it came through
+  #   unset_temperature_accepted     a gRPC reading sent without a temperature is accepted
+  #                                  and processed as 0.0
+  # Example of the form only: open_gaps: [option_id, another_option_id]
+  open_gaps: []

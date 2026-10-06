@@ -1,0 +1,20 @@
+// Coldline - Task 4.8
+// File: proto/coldline/ingest/v1/ingest.proto
+// Component: gRPC reading intake contract
+// Purpose: Declare the Protobuf package and the service the gateways' reading intake uses.
+// Interacts With: docs/contracts/ingest-grpc.md, src/api/grpc_ingest.py, poe proto-gen, poe proto-check
+// Sprint/Task: Sprint 4 - Project 4 / Task 4.8
+// Concepts: Protobuf schema, field numbers, explicit presence, unary gRPC method
+// Tools: Protobuf (proto3), grpcio-tools
+
+syntax = "proto3";
+
+package coldline.ingest.v1;
+
+// Step 1: define the reading message and the acceptance response here, with the names,
+// fields, types, numbers and presence rules docs/contracts/ingest-grpc.md gives.
+
+// The service the API serves on the gRPC port README.md publishes. Step 1: declare its one
+// method inside the braces, under the contract's method name.
+service ReadingIngest {
+}

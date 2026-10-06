@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Coldline Task 4.8 public answer contract. Six answers: the gRPC status names of the accepted and the refused call, the sizes in bytes of one supplied reading encoded as JSON and as Protobuf, the recommendation on moving the gateways, and the open gaps chosen from the options submission.yaml lists. The public check validates this shape and that the sheet is not a copy of the sample, and `poe verify` compares the two statuses with the calls it makes; the protected answer check compares the two sizes and the open gaps after the submission on the platform. The recommendation is the student's own call and only its membership is checked. There is no self-attestation field, no pass boolean, and no free text.",
+  "title": "Coldline Task 4.8 answers",
+  "description": "The two call statuses, the two payload sizes, the recommendation, and the open gaps.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answers"],
+  "$defs": {
+    "grpc_status": {
+      "description": "A gRPC status name, exactly as `poe grpc-call` prints it.",
+      "enum": [
+        "OK",
+        "CANCELLED",
+        "UNKNOWN",
+        "INVALID_ARGUMENT",
+        "DEADLINE_EXCEEDED",
+        "NOT_FOUND",
+        "ALREADY_EXISTS",
+        "PERMISSION_DENIED",
+        "RESOURCE_EXHAUSTED",
+        "FAILED_PRECONDITION",
+        "ABORTED",
+        "OUT_OF_RANGE",
+        "UNIMPLEMENTED",
+        "INTERNAL",
+        "UNAVAILABLE",
+        "DATA_LOSS",
+        "UNAUTHENTICATED"
+      ]
+    },
+    "byte_count": {
+      "description": "A size in bytes, as `poe payload-size` prints it: a positive whole number.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000000
+    }
+  },
+  "properties": {
+    "answers": {
+      "description": "The only top-level answer mapping accepted by the public verifier.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted_status",
+        "refused_status",
+        "json_bytes",
+        "protobuf_bytes",
+        "recommendation",
+        "open_gaps"
+      ],
+      "properties": {
+        "accepted_status": {
+          "description": "The status `poe grpc-call --token gateway-valid` printed.",
+          "$ref": "#/$defs/grpc_status"
+        },
+        "refused_status": {
+          "description": "The status `poe grpc-call --token dispatcher-valid` printed.",
+          "$ref": "#/$defs/grpc_status"
+        },
+        "json_bytes": {
+          "description": "The JSON size `poe payload-size` printed.",
+          "$ref": "#/$defs/byte_count"
+        },
+        "protobuf_bytes": {
+          "description": "The Protobuf size `poe payload-size` printed.",
+          "$ref": "#/$defs/byte_count"
+        },
+        "recommendation": {
+          "description": "Whether to move the gateways to the gRPC intake: one of the listed values.",
+          "enum": ["move_now", "move_after_json_intake_closed", "do_not_move"]
+        },
+        "open_gaps": {
+          "description": "Every option submission.yaml lists that this change leaves open, each once.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "caller_is_unproven_gateway",
+              "dispatcher_token_submits",
+              "expired_token_reaches_method",
+              "json_intake_open",
+              "plaintext_token",
+              "reading_skips_worker_controls",
+              "sender_missing_from_audit",
+              "unset_temperature_accepted"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

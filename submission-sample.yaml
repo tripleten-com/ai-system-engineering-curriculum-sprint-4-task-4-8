@@ -1,0 +1,25 @@
+# Coldline - Task 4.8
+# File: submission-sample.yaml
+# Component: Fictional completed answer sheet
+# Purpose: Show the accepted shape.
+# Interacts With: docs/contracts/submission.schema.json
+# Sprint/Task: Sprint 4 - Project 4 / Task 4.8
+# Concepts: Answer-sheet shape
+# Tools: YAML
+
+# Complete submission.yaml from your own runs and the sources named beside each answer.
+# Keep the supplied keys; replace the empty strings, the zeros and the empty list using each
+# field's stated type. Empty values fail verification.
+# Use submission-sample.yaml for format only; do not copy its fictional values.
+# Do not include secrets, personal data, or local absolute paths.
+# This fictional sample is not a result to submit; an exact copy is rejected.
+
+answers:
+  accepted_status: "ALREADY_EXISTS"
+  refused_status: "NOT_FOUND"
+  json_bytes: 512
+  protobuf_bytes: 96
+  recommendation: "do_not_move"
+  open_gaps:
+    - caller_is_unproven_gateway
+    - reading_skips_worker_controls
